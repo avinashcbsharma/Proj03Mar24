@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proj01-Mar24</title>
+    <style>
+
+        *{  
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 15px;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            margin: 5px 15px 15px 0px;
+        }
+        body,.main{
+            display: flex;
+            justify-content: center;
+        }
+        .main{                        
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 2rem;
+            box-shadow:1px 1px 2px rgb(206, 212, 193);
+            width: 600px;
+        }
+        #email,#password,#btn{
+            padding: 3px 12px;
+            border:1.5px solid black;
+            border-radius: 5px;
+            background-color: white;
+        }
+        #email,#password{
+            width: 450px;            
+        }
+        #btn{
+            width:160px;
+        }
+        p{
+            margin: -8px 0px 20px 0px;
+            font-size: 14px;
+        }
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form id="signupForm">
+            <label for="email">Email</label><br>
+            <input type="text" id="email" name="email" placeholder="Example@email.com">
+            <p id="eError" class="red">
+                Make sure email is more than 3 characters and has @ and a .
+            </p>
+    
+            <label for="password">Password</label><br>
+            <input type="password" id="password" name="password" placeholder="Your Password">
+            <p id="pError" class="red">
+                Make sure password is more than 8 characters.
+            </p>
+    
+            <button id="btn" class="submit" type="button">Submit</button>
+        </form>
+    </div> 
+    <script>
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        document.querySelector(".submit").addEventListener('click', submitForm);
+        const eError = document.getElementById('eError');
+        const pError = document.getElementById('pError');   
+       
+        emailInput.addEventListener('change',function validateEmail() {
+            
+            if (emailInput.value.length > 3 && emailInput.value.includes('@') && emailInput.value.includes('.')) {
+                eError.innerText = '';  
+                eError.classList.add('green');
+                eError.classList.remove('red');
+                emailInput.disabled = true;
+            } 
+         });
+
+        passwordInput.addEventListener('change', function validatePassword() {
+    
+            if (emailInput.value.length > 3 && emailInput.value.includes('@') && emailInput.value.includes('.') && passwordInput.value.length >= 8){
+                console.log("True");
+                pError.innerText = '';      
+                pError.classList.add('green');
+                pError.classList.remove('red');
+                pError.innerText = 'All good to go!';
+                passwordInput.disabled = true;
+            }
+        });
+        
+        function submitForm(){
+    
+            if (document.getElementById('eError').classList.contains('green') &&
+                document.getElementById('pError').classList.contains('green')) {
+                
+                let confirmation = confirm('Do you want to submit the form?');
+                
+                if (confirmation) {
+                    alert('Successful signup!');
+                }                 
+                location.reload();            
+            }
+        };
+    </script>
+    
+</body>
+</html>
